@@ -18,7 +18,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         if #available(iOS 15.0, *) {
             let appearance = UITabBarAppearance()
             appearance.configureWithOpaqueBackground()
-            UITabBar.appearance().backgroundColor = UIColor.lightGray
+            UITabBar.appearance().backgroundColor = UIColor.red
         }
         
         return true
