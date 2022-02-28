@@ -6,6 +6,7 @@
 //
 
 import UIKit
+import Kingfisher
 
 final class TodayViewController: UICollectionViewController {
     
@@ -13,8 +14,6 @@ final class TodayViewController: UICollectionViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        collectionView.collectionViewLayout = UICollectionViewFlowLayout()
         
         //data Setting
         todayList = getTodayList()
@@ -58,8 +57,9 @@ extension TodayViewController {
     override func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "TodayCollectionViewCell", for: indexPath) as? TodayCollectionViewCell else { return UICollectionViewCell() }
         let url = URL(string: todayList[indexPath.row].imageURL)
-        let data = try? Data(contentsOf: url!)
-        cell.imageView.image = UIImage(data: data!)
+        
+        cell.imageView.kf.setImage(with: url!) //kingfisher사용하면 자동으로 비동기로 이미지가져오기에 잔렉 안걸림.
+        
         cell.title.text = todayList[indexPath.row].title
         cell.subTitle.text = todayList[indexPath.row].subTitle
         cell.descrip.text = todayList[indexPath.row].description
@@ -89,19 +89,19 @@ extension TodayViewController {
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        let width: CGFloat = collectionView.frame.width - 32
+        let width: CGFloat = (UIScreen.main.bounds.width) - 32
         return CGSize(width: width, height: 100)
     }
 }
 
 extension TodayViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (UIScreen.main.bounds.width) - 32, height: collectionView.frame.width - 32)
+        return CGSize(width: (UIScreen.main.bounds.width) - 32, height: (UIScreen.main.bounds.width) - 32)
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, insetForSectionAt section: Int) -> UIEdgeInsets {
         let value: CGFloat = 16 //swiftUI에서 padding()하는 거랑 유사한 역할인듯.
-        
+
         return UIEdgeInsets(top: value, left: value, bottom: value, right: value)
     }
 }

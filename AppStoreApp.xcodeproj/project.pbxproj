@@ -19,6 +19,7 @@
 		964C99E027CA42BA009868DD /* TodayCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964C99DF27CA42BA009868DD /* TodayCollectionViewCell.swift */; };
 		964C99E227CA445A009868DD /* Today.swift in Sources */ = {isa = PBXBuildFile; fileRef = 964C99E127CA445A009868DD /* Today.swift */; };
 		964C99E527CA47E1009868DD /* Today.plist in Resources */ = {isa = PBXBuildFile; fileRef = 964C99E427CA47E1009868DD /* Today.plist */; };
+		96958BF227CC96270092CCF0 /* AppViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 96958BF127CC96270092CCF0 /* AppViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -34,6 +35,7 @@
 		964C99DF27CA42BA009868DD /* TodayCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TodayCollectionViewCell.swift; sourceTree = "<group>"; };
 		964C99E127CA445A009868DD /* Today.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Today.swift; sourceTree = "<group>"; };
 		964C99E427CA47E1009868DD /* Today.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Today.plist; sourceTree = "<group>"; };
+		96958BF127CC96270092CCF0 /* AppViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -102,9 +104,18 @@
 			isa = PBXGroup;
 			children = (
 				964C99D827CA3021009868DD /* TabBarController.swift */,
+				96958BF327CC963E0092CCF0 /* App */,
 				964C99DE27CA3E76009868DD /* Today */,
 			);
 			path = Scenes;
+			sourceTree = "<group>";
+		};
+		96958BF327CC963E0092CCF0 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				96958BF127CC96270092CCF0 /* AppViewController.swift */,
+			);
+			path = App;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -188,6 +199,7 @@
 			files = (
 				964C99E027CA42BA009868DD /* TodayCollectionViewCell.swift in Sources */,
 				964C99E227CA445A009868DD /* Today.swift in Sources */,
+				96958BF227CC96270092CCF0 /* AppViewController.swift in Sources */,
 				964C99DB27CA3CCC009868DD /* TodayViewController.swift in Sources */,
 				964C99D927CA3021009868DD /* TabBarController.swift in Sources */,
 				964C99DD27CA3E4A009868DD /* TodayHeader.swift in Sources */,
