@@ -6,12 +6,20 @@
 //
 
 import UIKit
+import SnapKit
 
 class TodayHeader: UICollectionReusableView {
     
     let headerStackView = UIStackView()
     
-    let dateLabel = UILabel()
+    let dateLabel: UILabel = {
+        let label = UILabel()
+        label.font = .systemFont(ofSize: 12, weight: .bold)
+        label.textColor = UIColor.secondaryLabel
+        label.sizeToFit()
+        return label
+    }()
+    //위처럼 바로 정의해도되고, 아래에서 따로 정의해도된다.
     let titleLabel = UILabel()
     
     override func layoutSubviews() {
@@ -23,12 +31,12 @@ class TodayHeader: UICollectionReusableView {
         //StackView's Attributes
         headerStackView.axis = .vertical
         headerStackView.alignment = .leading
-        headerStackView.distribution = .fillProportionally
+//        headerStackView.distribution = .fillProportionally
         headerStackView.spacing = 5
         
         //Make StackView's Constraints
         headerStackView.snp.makeConstraints {
-            $0.edges.equalToSuperview()
+            $0.leading.equalToSuperview().offset(16)
         }
         
         //StackView's Components
@@ -37,12 +45,16 @@ class TodayHeader: UICollectionReusableView {
         }
         
         //Label Configuration
-        dateLabel.font = .systemFont(ofSize: 12)
-        dateLabel.textColor = UIColor.secondaryLabel
-        dateLabel.sizeToFit()
-        
-        titleLabel.font = .systemFont(ofSize: 30, weight: .bold)
+        titleLabel.font = .systemFont(ofSize: 36, weight: .black)
         titleLabel.textColor = UIColor.black
         titleLabel.sizeToFit()
+        
+        dateLabel.snp.makeConstraints {
+            $0.top.equalTo(headerStackView.snp.top).offset(32)
+        }
+
+        titleLabel.snp.makeConstraints {
+            $0.top.equalTo(dateLabel.snp.bottom).offset(8)
+        }
     }
 }

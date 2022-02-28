@@ -70,8 +70,7 @@
 			children = (
 				964C99BE27CA2EE6009868DD /* AppDelegate.swift */,
 				964C99C027CA2EE6009868DD /* SceneDelegate.swift */,
-				964C99D827CA3021009868DD /* TabBarController.swift */,
-				964C99DE27CA3E76009868DD /* TodayTab */,
+				96958BF027CC84BA0092CCF0 /* Scenes */,
 				964C99E327CA445F009868DD /* Entities */,
 				964C99C727CA2EE7009868DD /* Assets.xcassets */,
 				964C99C927CA2EE7009868DD /* LaunchScreen.storyboard */,
@@ -81,14 +80,14 @@
 			path = AppStoreApp;
 			sourceTree = "<group>";
 		};
-		964C99DE27CA3E76009868DD /* TodayTab */ = {
+		964C99DE27CA3E76009868DD /* Today */ = {
 			isa = PBXGroup;
 			children = (
 				964C99DA27CA3CCC009868DD /* TodayViewController.swift */,
 				964C99DC27CA3E4A009868DD /* TodayHeader.swift */,
 				964C99DF27CA42BA009868DD /* TodayCollectionViewCell.swift */,
 			);
-			path = TodayTab;
+			path = Today;
 			sourceTree = "<group>";
 		};
 		964C99E327CA445F009868DD /* Entities */ = {
@@ -97,6 +96,15 @@
 				964C99E127CA445A009868DD /* Today.swift */,
 			);
 			path = Entities;
+			sourceTree = "<group>";
+		};
+		96958BF027CC84BA0092CCF0 /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				964C99D827CA3021009868DD /* TabBarController.swift */,
+				964C99DE27CA3E76009868DD /* Today */,
+			);
+			path = Scenes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

@@ -7,10 +7,10 @@
 
 import UIKit
 
-class TodayViewController: UICollectionViewController {
+final class TodayViewController: UICollectionViewController {
     
     var todayList: [Today] = []
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -30,6 +30,8 @@ class TodayViewController: UICollectionViewController {
             TodayCollectionViewCell.self,
             forCellWithReuseIdentifier: "TodayCollectionViewCell"
         )
+        
+        configureCollectionView()
     }
     
     func getTodayList() -> [Today] {
@@ -42,7 +44,7 @@ class TodayViewController: UICollectionViewController {
     //collectionView 기본설정. 아래에 extension으로 delegate설정.
     private func configureCollectionView() {
         self.collectionView.collectionViewLayout = UICollectionViewFlowLayout()
-        self.collectionView.contentInset = UIEdgeInsets(top: 10, left: 10, bottom: 10, right: 10)
+        self.collectionView.contentInset = UIEdgeInsets(top: 16, left: 16, bottom: 16, right: 16)
     }
 }
 
@@ -58,8 +60,11 @@ extension TodayViewController {
         let url = URL(string: todayList[indexPath.row].imageURL)
         let data = try? Data(contentsOf: url!)
         cell.imageView.image = UIImage(data: data!)
+        cell.title.text = todayList[indexPath.row].title
+        cell.subTitle.text = todayList[indexPath.row].subTitle
+        cell.descrip.text = todayList[indexPath.row].description
         
-        cell.layer.cornerRadius = 15.0
+        cell.layer.cornerRadius = 12.0
         cell.layer.borderWidth = 0.0
         cell.layer.shadowColor = UIColor.black.cgColor
         cell.layer.shadowOffset = CGSize(width: 0, height: 0)
@@ -91,6 +96,6 @@ extension TodayViewController {
 
 extension TodayViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: (UIScreen.main.bounds.width) - 20, height: (UIScreen.main.bounds.width) - 20)
+        return CGSize(width: (UIScreen.main.bounds.width) - 32, height: (UIScreen.main.bounds.width) - 32)
     }
 }
