@@ -17,6 +17,8 @@ class TodayHeader: UICollectionReusableView {
         label.font = .systemFont(ofSize: 14, weight: .bold)
         label.textColor = UIColor.secondaryLabel
         label.sizeToFit()
+        
+        print("dateLabel 호출됨.")
         return label
     }()
     //위처럼 바로 정의해도되고, 아래에서 따로 정의해도된다.

@@ -9,7 +9,6 @@ import UIKit
 import SnapKit
 
 final class RankingFeatureSectionView: UIView {
-    private let cellHeight: CGFloat = 30.0
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -43,7 +42,7 @@ final class RankingFeatureSectionView: UIView {
         collectionView.backgroundColor = .systemBackground
         collectionView.showsHorizontalScrollIndicator = false
         
-        collectionView.register(UICollectionViewCell.self, forCellWithReuseIdentifier: "RankingFeatureCollectionViewCell")
+        collectionView.register(RankingFeatureCollectionViewCell.self, forCellWithReuseIdentifier: "RankingFeatureCollectionViewCell")
         
         return collectionView
     }()
@@ -67,9 +66,9 @@ extension RankingFeatureSectionView: UICollectionViewDataSource {
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RankingFeatureCollectionViewCell", for: indexPath)
+        guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RankingFeatureCollectionViewCell", for: indexPath) as? RankingFeatureCollectionViewCell else { return UICollectionViewCell() }
         
-        cell.backgroundColor = .red
+        cell.setup()
         
         return cell
     }
@@ -80,7 +79,7 @@ extension RankingFeatureSectionView: UICollectionViewDelegateFlowLayout {
         return CGSize(
             //Item사이즈는 collectionView사이즈 기준으로 조정.
             width: collectionView.frame.width - 32,
-            height: cellHeight
+            height: RankingFeatureCollectionViewCell.height
         )
     }
 }
@@ -103,7 +102,7 @@ private extension RankingFeatureSectionView {
 
         collectionView.snp.makeConstraints {
             $0.top.equalTo(titleLabel.snp.bottom).offset(16.0)
-            $0.height.equalTo(cellHeight * 3)
+            $0.height.equalTo(RankingFeatureCollectionViewCell.height * 3)
             $0.leading.equalToSuperview()
             $0.trailing.equalToSuperview()
         }

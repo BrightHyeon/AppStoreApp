@@ -20,6 +20,7 @@ class TabBarController: UITabBarController {
             tag: 0
         )
         viewController.tabBarItem = tabBarItem
+        print("todayViewController 호출됨.")
         return viewController
     }()
 
@@ -36,6 +37,7 @@ class TabBarController: UITabBarController {
             tag: 1
         )
         viewController.tabBarItem = tabBarItem
+        print("appViewController 호출됨.")
         return viewController
     }()
     
@@ -43,7 +45,9 @@ class TabBarController: UITabBarController {
     //MARK: - Override Method
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
+        print("TabBarController 로드됨.")
+        
         view.backgroundColor = .systemBackground
         
         viewControllers = [todayViewController, appViewController]

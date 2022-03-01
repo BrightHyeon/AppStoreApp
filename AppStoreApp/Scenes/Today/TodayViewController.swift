@@ -104,4 +104,17 @@ extension TodayViewController: UICollectionViewDelegateFlowLayout {
 
         return UIEdgeInsets(top: value, left: value, bottom: value, right: value)
     }
+    
+    override func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let detailedVC = TodayDetailedViewController()
+        
+        let url = URL(string: todayList[indexPath.row].imageURL)
+        
+        detailedVC.imageView.kf.setImage(with: url!)
+        detailedVC.titleLabel.text = todayList[indexPath.row].title
+        detailedVC.descriptionLabel.text = todayList[indexPath.row].subTitle
+        
+        self.present(detailedVC, animated: true, completion: nil)
+    }
 }

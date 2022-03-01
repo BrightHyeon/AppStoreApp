@@ -21,16 +21,21 @@ final class AppViewController: UIViewController {
         
         let featureSectionView = FeatureSectionView(frame: .zero) //init(frame:)안에 View setup Method를 정의했기때문에 호출해주기.
         let rankingFeatureSectionView = RankingFeatureSectionView(frame: .zero)
-        let exchangeCodeButtonView = UIView()
+        let exchangeCodeButtonView = ExchangeCodeButtonView(frame: .zero)
         
-        exchangeCodeButtonView.backgroundColor = .blue
+        //just for spacing
+        let spacingView = UIView()
+        spacingView.snp.makeConstraints {
+            $0.height.equalTo(100.0)
+        }
         
         [
             featureSectionView,
             rankingFeatureSectionView,
-            exchangeCodeButtonView
+            exchangeCodeButtonView,
+            spacingView
         ].forEach {
-            stackView.addArrangedSubview($0)
+            stackView.addArrangedSubview($0);
         }
         
         return stackView

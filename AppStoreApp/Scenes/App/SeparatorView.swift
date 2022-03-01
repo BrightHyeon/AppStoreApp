@@ -13,6 +13,7 @@ final class SeparatorView: UIView {
         let separator = UIView()
         separator.backgroundColor = .separator
         
+        print("Separator 호출됨.")
         return separator
     }()
     

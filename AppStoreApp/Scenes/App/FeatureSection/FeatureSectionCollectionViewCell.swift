@@ -15,6 +15,7 @@ final class FeatureSectionCollectionViewCell: UICollectionViewCell {
         label.textColor = .systemBlue
         label.font = .systemFont(ofSize: 12, weight: .semibold)
         
+        print("typeLabel 호출됨.")
         return label
     }()
     
