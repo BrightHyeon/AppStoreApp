@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class FeatureSectionView: UIView {
+    
+    private var featureList: [Feature] = []
     
     private let separatorView = SeparatorView(frame: .zero) //init 호출.
     
@@ -29,11 +32,22 @@ final class FeatureSectionView: UIView {
         return collectionView
     }()
     
+    private func getFeatureList() -> [Feature] {
+        guard let path = Bundle.main.path(forResource: "Feature", ofType: "plist"),
+              let data = FileManager.default.contents(atPath: path),
+              let list = try? PropertyListDecoder().decode([Feature].self, from: data) else { return [] }
+        print("list 성공적으로 decoding됨.")
+        
+        return list
+    }
+    
     //CollectionViewController에서는 didload메서드에서 setup해주면 되지만, 이런 View class에선 init활용해보기.
     override init(frame: CGRect) {
         super.init(frame: frame)
         
         setupViews()
+        
+        featureList = getFeatureList()
     }
     
     required init?(coder: NSCoder) {
@@ -45,11 +59,19 @@ final class FeatureSectionView: UIView {
 extension FeatureSectionView: UICollectionViewDataSource {
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 10
+        return featureList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "FeatureSectionColletionViewCell", for: indexPath) as? FeatureSectionCollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.typeLabel.text = featureList[indexPath.row].type
+        cell.appNameLabel.text = featureList[indexPath.row].appName
+        cell.descriptionLabel.text = featureList[indexPath.row].description
+        
+        let url = URL(string: featureList[indexPath.row].imageURL)
+        
+        cell.imageView.kf.setImage(with: url)
         
         cell.setup()
         

@@ -7,8 +7,11 @@
 
 import UIKit
 import SnapKit
+import Kingfisher
 
 final class RankingFeatureSectionView: UIView {
+    
+    private var rankingFeatureList: [RankingFeature] = []
     
     private lazy var titleLabel: UILabel = {
         let label = UILabel()
@@ -53,20 +56,34 @@ final class RankingFeatureSectionView: UIView {
         super.init(frame: frame)
         
         setupViews()
+        
+        rankingFeatureList = getRankingFeatureList()
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
     }
+    
+    private func getRankingFeatureList() -> [RankingFeature] {
+        guard let path = Bundle.main.path(forResource: "RankingFeature", ofType: "plist"),
+              let data = FileManager.default.contents(atPath: path),
+              let list = try? PropertyListDecoder().decode([RankingFeature].self, from: data) else { return [] }
+        
+        return list
+    }
 }
 
 extension RankingFeatureSectionView: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return 9
+        return rankingFeatureList.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         guard let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "RankingFeatureCollectionViewCell", for: indexPath) as? RankingFeatureCollectionViewCell else { return UICollectionViewCell() }
+        
+        cell.titleLabel.text = rankingFeatureList[indexPath.row].title
+        cell.descriptionLabel.text = rankingFeatureList[indexPath.row].description
+        cell.inAppPurchaseInfoLabel.isHidden = !rankingFeatureList[indexPath.row].isInPurchaseApp
         
         cell.setup()
         

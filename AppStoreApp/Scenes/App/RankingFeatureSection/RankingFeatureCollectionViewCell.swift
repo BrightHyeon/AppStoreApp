@@ -21,7 +21,7 @@ final class RankingFeatureCollectionViewCell: UICollectionViewCell {
         return imageView
     }()
     
-    private lazy var titleLabel: UILabel = {
+    lazy var titleLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 16, weight: .bold)
         label.textColor = .label
@@ -30,7 +30,7 @@ final class RankingFeatureCollectionViewCell: UICollectionViewCell {
         return label
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    lazy var descriptionLabel: UILabel = {
         let label = UILabel()
         label.font = .systemFont(ofSize: 13.0, weight: .semibold)
         label.textColor = .secondaryLabel
@@ -49,7 +49,7 @@ final class RankingFeatureCollectionViewCell: UICollectionViewCell {
         return button
     }()
     
-    private var inAppPurchaseInfoLabel: UILabel = {
+    var inAppPurchaseInfoLabel: UILabel = {
         let label = UILabel()
         label.text = "앱 내 구입"
         label.font = .systemFont(ofSize: 10.0, weight: .semibold)
@@ -60,11 +60,6 @@ final class RankingFeatureCollectionViewCell: UICollectionViewCell {
     
     func setup() {
         setupLayout()
-        
-        titleLabel.text = "App title"
-        descriptionLabel.text = "description: 이러이러한 앱입니다."
-        //isHidden 활용.
-        inAppPurchaseInfoLabel.isHidden = [true, false].randomElement() ?? true
     }
 }
 
