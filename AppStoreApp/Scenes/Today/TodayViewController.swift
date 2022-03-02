@@ -33,7 +33,8 @@ final class TodayViewController: UICollectionViewController {
         configureCollectionView()
     }
     
-    func getTodayList() -> [Today] {
+    //맨 아래 참고.
+    private func getTodayList() -> [Today] {
         guard let path = Bundle.main.path(forResource: "Today", ofType: "plist"),
               let data = FileManager.default.contents(atPath: path),
               let list = try? PropertyListDecoder().decode([Today].self, from: data) else { return [] }
@@ -60,8 +61,8 @@ extension TodayViewController {
         
         cell.imageView.kf.setImage(with: url!) //kingfisher사용하면 자동으로 비동기로 이미지가져오기에 잔렉 안걸림.
         
-        cell.title.text = todayList[indexPath.row].title
-        cell.subTitle.text = todayList[indexPath.row].subTitle
+        cell.title.text = todayList[indexPath.item].title
+        cell.subTitle.text = todayList[indexPath.item].subTitle
         cell.descrip.text = todayList[indexPath.row].description
         
         cell.layer.cornerRadius = 12.0
@@ -116,5 +117,20 @@ extension TodayViewController: UICollectionViewDelegateFlowLayout {
         detailedVC.descriptionLabel.text = todayList[indexPath.row].subTitle
         
         self.present(detailedVC, animated: true, completion: nil)
+    }
+}
+
+
+//plist에서 데이터 가져오는 방법은 더 있음.
+//위처럼 Path방식으로 가져올 수도 있고, 아래처럼 URL방식으로도 가능.
+private extension TodayViewController {
+    func fetchData() {
+        guard let url = Bundle.main.url(forResource: "Today", withExtension: "plist") else { return }
+        
+        do {
+            let data = try Data(contentsOf: url)
+            let list = try PropertyListDecoder().decode([Today].self, from: data)
+            self.todayList = list
+        } catch {}
     }
 }

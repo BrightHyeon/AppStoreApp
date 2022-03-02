@@ -53,13 +53,14 @@ class TodayDetailedViewController: UIViewController {
         let button = UIButton()
         button.setImage(UIImage(systemName: "square.and.arrow.up"), for: .normal)
         button.tintColor = .systemBlue
+        //button에 액션추가.
+        button.addTarget(self, action: #selector(shareButtonTapped), for: .touchUpInside)
         
         return button
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         //view초기화 코드의 중요성!!! 아래처럼 backgroundColor정도도 지정해주지않으면 아예 뜨질않고, 오류남.
         view.backgroundColor = .systemBackground
         
@@ -107,5 +108,16 @@ private extension TodayDetailedViewController {
             $0.bottom.equalTo(downloadButton)
             $0.width.height.equalTo(32)
         }
+    }
+    
+    //share sheet - UIActivityViewController
+    //init(activityItems: [Any], applicationActivities: [UIActivity])
+    @objc func shareButtonTapped() {
+        let activityItems: [Any] = [titleLabel.text!]
+        let activityViewController = UIActivityViewController(
+            activityItems: activityItems, //앱에서 공유할 콘텐츠. ex) 앱 상세화면으로 이동할 URL
+            applicationActivities: nil //공유될 목적지. ex) iOS 기본 메시지 앱 - 사용자가 자주 쓰는 앱 순서대로 알아서 나옴. 간단하니 사용 추천.
+        )
+        present(activityViewController, animated: true, completion: nil)
     }
 }
